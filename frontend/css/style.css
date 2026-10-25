@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --primary-blue: #4f46e5;
+    --primary-light: #818cf8;
+    --primary-dark: #3730a3;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-color: #1e293b;
+    --text-muted: #64748b;
+    --navbar-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --border-strong: #000000;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --border-radius: 16px;
+    --warning-orange: #f59e0b;
+}
+
+[data-bs-theme="dark"] {
+    --bg-color: #020617;
+    --card-bg: #0f172a;
+    --text-color: #f1f5f9;
+    --text-muted: #94a3b8;
+    --navbar-bg: #0f172a;
+    --border-color: #1e293b;
+    --border-strong: #1e293b; 
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-color);
+    transition: background-color 0.4s, color 0.4s;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Auth Page Redesign */
+.auth-split-wrapper {
+    min-height: 100vh;
+    display: flex;
+}
+
+.auth-visual {
+    flex: 1;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    color: white;
+    text-align: center;
+}
+
+.auth-visual img {
+    max-width: 80%;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+    margin-bottom: 3rem;
+    animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.auth-form-side {
+    width: 450px;
+    background-color: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+}
+
+@media (max-width: 992px) {
+    .auth-visual { display: none; }
+    .auth-form-side { width: 100%; }
+}
+
+.auth-card {
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+/* Dashboard Layout */
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--primary-blue) !important;
+}
+
+.card {
+    border: 1px solid var(--border-strong);
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-blue);
+}
+
+/* Stats Cards */
+.stat-card-inner {
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+[data-bs-theme="dark"] .stat-card-inner {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Theme Toggle New Design */
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-strong);
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-blue);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    border-color: var(--primary-blue);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+/* Custom button states */
+.btn-outline-orange {
+    color: var(--warning-orange);
+    border-color: var(--warning-orange);
+    border-width: 2px;
+}
+
+.btn-outline-orange:hover {
+    background-color: var(--warning-orange);
+    color: white;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+/* Glassmorphism containers */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Statistics Cards Enhancement */
+.card-stats {
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-blue);
+    border-radius: 12px;
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.1);
+}
+
+.card-stats:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.2);
+    border-color: var(--primary-light);
+}
+
+.stats-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.stats-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.stats-icon-bg {
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    font-size: 4rem;
+    opacity: 0.18;
+    color: #000000; /* High contrast for light mode */
+    transform: rotate(-15deg);
+}
+
+[data-bs-theme="dark"] .stats-icon-bg {
+    color: #ffffff;
+    opacity: 0.15;
+}
+
+[data-bs-theme="dark"] .card-stats {
+    background: linear-gradient(145deg, #0f172a 0%, #020617 100%);
+    border-color: rgba(79, 70, 229, 0.4);
+}
+
+/* Controls */
+.datepicker-container {
+    background: var(--card-bg);
+    border: 1px solid var(--primary-blue);
+    border-radius: 12px;
+    padding: 0.5rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.datepicker-container:hover {
+    border-color: var(--primary-blue);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+}
+
+.datepicker-container input {
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    cursor: pointer;
+}
+
+.datepicker-container i {
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+}
+
+/* Floating Back Button */
+.back-btn-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.back-btn {
+    width: 56px;
+    height: 56px;
+    background-color: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    transform: scale(1.1) rotate(-10deg);
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+
+

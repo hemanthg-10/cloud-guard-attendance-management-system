@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance - Attendance Console</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Theme Manager -->
+    <script src="../js/theme.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="../dashboard.html">
+                <i class="fas fa-university me-2"></i> Attendance Console
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../dashboard.html">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../classes.html">Mark Attendance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../stats.html">Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link text-danger fw-bold" href="#" onclick="logout()">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container pb-5">
+        <div class="row g-4">
+
+            <!-- Sidebar: Controls & Summary -->
+            <div class="col-lg-3">
+
+                <!-- Class Selection -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <label class="form-label fw-bold small text-muted text-uppercase">Select Class</label>
+                        <select class="form-select form-select-lg mb-3" id="class-selector" onchange="fetchStudents()">
+                            <option value="A">CSE - Section A</option>
+                            <option value="B">CSE - Section B</option>
+                            <option value="C">CSE - Section C</option>
+                        </select>
+                        <label class="form-label fw-bold small text-muted text-uppercase">Attendance Date</label>
+                        <input type="date" class="form-control" id="attendance-date" onchange="fetchStudents()">
+                    </div>
+                </div>
+
+                <!-- Summary Panel -->
+                <div class="card summary-card mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 fw-bold"><i class="fas fa-chart-pie me-2 text-primary"></i> Live Summary</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-0">
+                            <div class="col-6 border-end border-bottom count-box">
+                                <span class="text-muted small">Total</span>
+                                <span class="count-number" id="total-count">0</span>
+                            </div>
+                            <div class="col-6 border-bottom count-box">
+                                <span class="text-success small">Present</span>
+                                <span class="count-number text-success" id="present-count">0</span>
+                            </div>
+                            <div class="col-6 border-end count-box">
+                                <span class="text-danger small">Absent</span>
+                                <span class="count-number text-danger" id="absent-count">0</span>
+                            </div>
+                            <div class="col-6 count-box">
+                                <span class="text-warning small">Late</span>
+                                <span class="count-number text-warning" id="late-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export UI -->
+                <button id="export-btn" class="btn btn-outline-secondary w-100 py-2 border-dashed shadow-sm" onclick="exportData()">
+                    <i class="fas fa-file-export me-2"></i> Export Report (PDF/Excel)
+                </button>
+            </div>
+
+            <!-- Export Modal -->
+            <div class="modal fade" id="exportModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+                        <div class="modal-header border-0 pb-0">
+                            <h5 class="modal-title fw-bold">Select Format</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body py-4">
+                            <div class="d-grid gap-3">
+                                <button class="btn btn-outline-primary py-3 d-flex align-items-center justify-content-center" onclick="exportToCSV()">
+                                    <i class="fas fa-file-excel fs-4 me-3"></i>
+                                    <div class="text-start">
+                                        <div class="fw-bold">Excel (.CSV)</div>
+                                        <div class="small opacity-75 text-truncate">Best for data analysis</div>
+                                    </div>
+                                </button>
+                                <button class="btn btn-outline-danger py-3 d-flex align-items-center justify-content-center" onclick="exportToPDF()">
+                                    <i class="fas fa-file-pdf fs-4 me-3"></i>
+                                    <div class="text-start">
+                                        <div class="fw-bold">PDF (Print)</div>
+                                        <div class="small opacity-75 text-truncate">Best for sharing/printing</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main: Attendance Sheet -->
+            <div class="col-lg-9">
+
+                <div class="card shadow-sm border-0 mb-4 overflow-hidden">
+                    <div class="card-header bg-transparent py-3 border-0">
+                        <h5 class="mb-0 fw-bold"><i class="fas fa-list-ul me-2 text-primary"></i>Student List</h5>
+                    </div>
+                    <div class="card-header py-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 mb-2 mb-md-0">
+                                <div class="search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" class="form-control" id="search-input"
+                                        placeholder="Search student name..." onkeyup="renderRegister()">
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-2 mb-md-0">
+                                <select class="form-select" id="status-filter" onchange="renderRegister()">
+                                    <option value="all">All Students</option>
+                                    <option value="present">Present Only</option>
+                                    <option value="absent">Absent Only</option>
+                                    <option value="late">Late Only</option>
+                                    <option value="unmarked">Unmarked</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 text-md-end action-buttons">
+                                <button class="btn btn-sm btn-success-subtle text-success border-success"
+                                    onclick="markAll('present')">All Present</button>
+                                <button class="btn btn-sm btn-danger-subtle text-danger border-danger"
+                                    onclick="markAll('absent')">All Absent</button>
+                                <button class="btn btn-sm btn-link text-muted" onclick="clearSelection()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="attendance-table-container">
+                        <div class="table-responsive" style="max-height: 500px;">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%">Reg ID</th>
+                                        <th style="width: 35%">Student Name</th>
+                                        <th class="text-center" style="width: 10%">Sec</th>
+                                        <th class="text-center" style="width: 40%">Status (P / A / L)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="register-body">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-end py-3">
+                        <button class="btn btn-primary px-5 fw-bold" id="save-btn" onclick="saveAttendance()">
+                            <i class="fas fa-save me-2"></i> Save Attendance Sheet
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Back Button -->
+    <div class="back-btn-container">
+        <a href="javascript:history.back()" class="back-btn" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="success-toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fas fa-check-circle me-2"></i> Attendance saved successfully!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="script.js"></script>
+    <script>
+        api.checkAuth();
+        // Set default date to today
+        document.getElementById('attendance-date').valueAsDate = new Date();
+    </script>
+</body>
+
+</html>

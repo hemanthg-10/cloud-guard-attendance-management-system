@@ -1,0 +1,17 @@
+{
+  "name": "cloud-guard-attendance-system",
+  "version": "1.0.0",
+  "description": "Frontend prototype for a cloud-based attendance management system.",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "start": "npm run dev --prefix frontend"
+  },
+  "keywords": [
+    "attendance-management",
+    "cloud-architecture",
+    "aws",
+    "vite"
+  ],
+  "author": "Hemanth G",
+  "license": "MIT"
+}

@@ -1,0 +1,32 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated output
+node_modules/
+.vite/
+dist/
+build/
+
+# Python / AWS build artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.serverless/
+.aws-sam/
+
+# Editors and operating system files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,280 @@
+:root {
+    --primary-blue: #4f46e5;
+    --primary-light: #818cf8;
+    --primary-dark: #3730a3;
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-color: #1e293b;
+    --text-muted: #64748b;
+    --navbar-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --border-strong: #000000;
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --border-radius: 16px;
+    --success-green: #10b981;
+    --danger-red: #ef4444;
+    --warning-orange: #f59e0b;
+}
+
+[data-bs-theme="dark"] {
+    --bg-color: #020617;
+    --card-bg: #0f172a;
+    --text-color: #f1f5f9;
+    --text-muted: #94a3b8;
+    --navbar-bg: #0f172a;
+    --border-color: #1e293b;
+    --border-strong: #1e293b;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-color);
+    transition: background-color 0.4s, color 0.4s;
+    -webkit-font-smoothing: antialiased;
+}
+
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--primary-blue) !important;
+}
+
+.card-header, .card-footer {
+    background-color: transparent !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-color);
+}
+
+/* Summary Panel */
+.summary-card {
+    border-top: 4px solid var(--primary-blue);
+}
+
+.count-box {
+    text-align: center;
+    padding: 10px;
+    border-color: var(--border-color) !important;
+}
+
+.count-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+}
+
+/* Register Table */
+.attendance-table-container {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.table {
+    color: var(--text-color);
+}
+
+.table thead th {
+    background-color: var(--border-color);
+    color: var(--text-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border: none;
+    position: sticky;
+    top: 0;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-bs-theme="dark"] .table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Theme Toggle New Design */
+.theme-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-strong);
+    color: var(--primary-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+/* Radio Button Styling */
+.status-radio-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.status-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+/* Filters and Actions */
+.action-buttons .btn {
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+#save-btn {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    border-radius: 12px;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted, #999);
+}
+
+.search-box input {
+    padding-left: 35px;
+    border-radius: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.form-select, .form-control {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.form-select:focus, .form-control:focus {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .status-radio-group {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Floating Back Button */
+.back-btn-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.back-btn {
+    width: 56px;
+    height: 56px;
+    background-color: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+    transition: all 0.2s;
+    border: none;
+}
+
+.back-btn:hover {
+    transform: scale(1.1) rotate(-10deg);
+    background-color: var(--primary-dark);
+    color: white;
+}
+
+/* Print Styles */
+@media print {
+    .navbar, 
+    .back-btn-container, 
+    .col-lg-3, 
+    .card-header:not(.bg-transparent), 
+    .action-buttons,
+    .search-box,
+    #status-filter {
+        display: none !important;
+    }
+
+    .container {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+    }
+
+    .col-lg-9 {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+
+    .attendance-table-container {
+        border: none !important;
+    }
+
+    .table thead th {
+        background-color: #f0f0f0 !important;
+        color: black !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    body {
+        background-color: white !important;
+    }
+
+    .form-check-input {
+        border-color: #ccc !important;
+    }
+}
+

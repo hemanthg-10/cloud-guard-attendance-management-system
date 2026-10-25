@@ -1,0 +1,21 @@
+{
+  "name": "cloud-guard-frontend",
+  "version": "1.0.0",
+  "description": "Vite development server for the Cloud Guard attendance frontend prototype.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite"
+  },
+  "keywords": [
+    "attendance-management",
+    "frontend",
+    "vite"
+  ],
+  "author": "Hemanth G",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "vite": "^8.0.0"
+  }
+}
